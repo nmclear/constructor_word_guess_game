@@ -3,21 +3,28 @@
 var Letter = function(character){
     this.character = character;
     this.guessed = false;
-
+    // console.log(character);
     //if not guessed, display placeholder. if guessed display character
     this.guess = function(){
         if(this.guessed === false){
-            console.log('_');
+            return '_';
         } else {
-            console.log(this.character);
+            return this.character;
         }
     }
     //Checks if user guess is true.
     this.checkGuess = function(userGuess){
         if(userGuess === this.character){
-            this.guessed = true;
+            guessed = true;
         }
     }
 }
 
 module.exports = Letter;
+
+// var firstGuess = new Letter('a');
+
+// Letter('a');
+// Letter.guess();
+
+// firstGuess.guess();

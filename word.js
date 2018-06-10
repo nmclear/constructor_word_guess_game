@@ -20,7 +20,7 @@ var Word = function(wordLetters){
 
     this.checkWord = function(characterGuess){
         for(var i = 0; i < this.wordLetters.length; i++){
-            wordLetters[i].checkGuess();
+            wordLetters[i].checkGuess(characterGuess);
         }
     }
 }

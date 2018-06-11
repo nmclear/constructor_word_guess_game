@@ -15,8 +15,9 @@ var Letter = function(character){
     //Checks if user guess is true.
     this.checkGuess = function(userGuess){
         if(userGuess === this.character){
-            guessed = true;
+            this.guessed = true;
         }
+        this.guess();
     }
 }
 

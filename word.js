@@ -23,7 +23,7 @@ var Word = function(word){
         // }
         // var wordStr = tempArr.join('');
         // console.log(wordStr);
-        // this.displayWordStr();
+        this.displayWordStr();
     }
     
     // new Letter(gameWord[]);
@@ -31,7 +31,8 @@ var Word = function(word){
     // console.log(wordLetters);
 
     this.displayWordStr = function(){
-        this.setWordLetters();
+        // this.setWordLetters();
+
         var tempArr = [];
         for(var j = 0; j < this.wordArr.length; j++){
             // var tempArr = [];
@@ -58,9 +59,9 @@ var Word = function(word){
     //     // console.log(wordStr);
     // }
 
-    this.checkWord = function(characterGuess){
-        for(var i = 0; i < this.lettersArr.length; i++){
-            lettersArr[i].checkGuess(characterGuess);
+    this.checkWord = function(guess){
+        for(var i = 0; i < this.wordArr.length; i++){
+            this.wordArr[i].checkGuess(guess);
         }
         this.displayWordStr();
     }

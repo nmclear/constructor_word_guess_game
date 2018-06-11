@@ -1,7 +1,7 @@
 
 //Constructor function for creating letter objects
 var Letter = function(character){
-    this.character = character.toUpperCase();
+    this.character = character;
     this.guessed = false;
     // console.log(character);
     //if not guessed, display placeholder. if guessed display character

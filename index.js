@@ -11,46 +11,58 @@ var wordBank = [
     'shark'
 ];
 
+
+startRound();
+
 function startRound(){
     var selectWord = wordBank[Math.floor((Math.random() * wordBank.length))];
     console.log('selectWord: ' + selectWord);
     var roundWord = new Word(selectWord);
     roundWord.setWordLetters();
-    // roundWord.displayWordStr();
-    // console.log(roundWord);
     guessAtempt(roundWord);
 }
 
-startRound();
+
 
 function guessAtempt(roundWord){
     inquirer.prompt([
-
         {
             type: 'input',
             name: 'letter',
             message: 'Guess a letter.'
         }
-
     ]).then(function(response){
-        // var userLetter = new Letter(response.letter);
         var userLetter = response.letter;
         console.log(roundWord);
         roundWord.checkWord(userLetter);
 
-        guessAtempt(roundWord);
-        // for(var i = 0; i < test.length; i++){
-
-        //     test[i].checkWord(userLetter);
-        //     // roundWord[i].guess();
-        // }
-        // roundWord[i].checkWord(userLetter);
-
-        
-        // roundWord.displayWordStr();
+        if(roundWord.checkFinishedWord()){
+            console.log('You win!');
+            playAgain();
+        } else {
+            guessAtempt(roundWord);
+        }
     });
 }
 
-function checkGame(){
 
-};
+
+
+function playAgain(){
+    inquirer.prompt([
+        {
+            type: 'confirm',
+            name: 'playAgain',
+            message: 'Do you want to play again?',
+            default: true
+        }
+    ]).then(function(answer){
+        if(answer.playAgain){
+            console.log('here we go for the next round!');
+            startRound();
+        } else {
+            console.log('Thanks for playing!');
+            process.exit();
+        }
+    })
+}

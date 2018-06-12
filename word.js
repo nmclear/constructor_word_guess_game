@@ -4,6 +4,8 @@ var Letter = require("./Letter");
 var Word = function(word){
     // this.gameWord = word.split('');
     this.lettersArr = word.split('');
+    // this.wordLength = this.lettersArr.length;
+    console.log(this.wordLength);
     this.wordArr = [];
 
     this.setWordLetters = function(){
@@ -14,50 +16,21 @@ var Word = function(word){
         }
         console.log(this.wordArr);
 
-        // var tempArr = [];
-        // for(var j = 0; j < this.wordArr.length; j++){
-
-        //     var letterChar = this.wordArr[j].character;
-        //     tempArr.push(letterChar);
-
-        // }
-        // var wordStr = tempArr.join('');
-        // console.log(wordStr);
         this.displayWordStr();
     }
-    
-    // new Letter(gameWord[]);
-    // console.log(gameWord);
-    // console.log(wordLetters);
 
     this.displayWordStr = function(){
-        // this.setWordLetters();
 
         var tempArr = [];
         for(var j = 0; j < this.wordArr.length; j++){
-            // var tempArr = [];
-            var letterChar = this.wordArr[j].guess();
+            var tempLetterObj = this.wordArr[j];
+            var letterChar = tempLetterObj.guess();
             tempArr.push(letterChar);
-            // console.log(i + ' .. ' + letterChar);
-            // wordStr = this.wordArr[j].character.join('');
-            // console.log(wordStr);
+
         }
         var wordStr = tempArr.join('');
         console.log(wordStr);
     }
-
-
-    // this.displayWordStr = function(wordArr){
-    //     // var wordStr = wordArr.join('');
-    //     var wordStr = '';
-    //     // console.log(wordStr);
-    //     for(var i = 0; i < this.wordArr.length; i++){
-    //         var letterChar = wordArr[i].character;
-    //         console.log(i + ' .. ' + letterChar);
-    //         // wordStr = wordArr[i].character.join('');
-    //     }
-    //     // console.log(wordStr);
-    // }
 
     this.checkWord = function(guess){
         for(var i = 0; i < this.wordArr.length; i++){
@@ -65,20 +38,14 @@ var Word = function(word){
         }
         this.displayWordStr();
     }
+    this.checkFinishedWord = function(){
+        for(var i = 0; i < this.wordArr.length; i++){
+            if(!this.wordArr[i].guessed){
+                return false;
+            };
+        }
+        return true;
+    }
 }
 
 module.exports = Word;
-
-// var gameGame = new Letter('d');
-// console.log('game: ' + gameGame);
-// var gameGame1 = new Letter('o');
-// var gameGame2 = new Letter('g');
-
-// var newWord = new Word(['d', 'o', 'g']);
-// var newWord = new Word([gameGame, gameGame1, gameGame2]);
-// var newWord = new Word('dog');
-// console.log('newWord: ' + newWord)
-// newWord.displayWordStr();
-// newWord.setWordLetters();
-// newWord.displayWordStr(newWord.setWordLetters());
-// newWord.displayWordStr();

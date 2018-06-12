@@ -1,31 +1,39 @@
+//========================================================================================================================
+// REQUIRED PACKAGES AND FILES
+//========================================================================================================================
+
 var Letter = require("./Letter");
 var Word = require("./Word");
 var inquirer = require('inquirer');
-var prompt = require('prompt');
+// var prompt = require('prompt');
+var colors = require('colors/safe');
+var chalk = require('chalk');
+
+//========================================================================================================================
+// WORD BANK
+//========================================================================================================================
 
 var wordBank = [
-    'dog',
-    'cat',
-    'fish',
-    'ocean',
-    'shark',
-    'seaweed',
-    'pacific ocean',
+    // 'dog',
+    // 'cat',
+    // 'fish',
+    // 'ocean',
+    // 'shark',
+    // 'seaweed',
+    // 'pacific ocean',
     'blue whale'
 ];
 
-
-startRound();
+//========================================================================================================================
+// GAME FUNCTIONS
+//========================================================================================================================
 
 function startRound(){
     var selectWord = wordBank[Math.floor((Math.random() * wordBank.length))];
-    console.log('selectWord: ' + selectWord);
     var roundWord = new Word(selectWord);
     roundWord.setWordLetters();
     guessAttempt(roundWord);
-}
-
-
+};
 
 function guessAttempt(roundWord){
     if(roundWord.guessesRemaining > 0){
@@ -46,30 +54,12 @@ function guessAttempt(roundWord){
             } else {
                 guessAttempt(roundWord);
             }
-            // guessAtempt(roundWord);
-
-
-            // // Check if input is a letter.
-            // if(letters.test(userLetter)){
-            //     console.log(roundWord);
-            //     roundWord.checkWord(userLetter);
-            //     //Check to see if user guessed all characters.
-            //     if(roundWord.checkFinishedWord()){
-            //         console.log('You win!');
-            //         playAgain();
-            //     } else {
-            //         guessAttempt(roundWord);
-            //     }
-            // } else {
-            //     console.log('PLEASE INPUT A LETTER ONLY!');
-            //     guessAttempt(roundWord);
-            // }
         });
     } else {
         console.log('You lost! No guesses remaining.');
         playAgain();
     }
-}
+};
 
 function playAgain(){
     inquirer.prompt([
@@ -81,11 +71,16 @@ function playAgain(){
         }
     ]).then(function(answer){
         if(answer.playAgain){
-            console.log('here we go for the next round!');
+            console.log(chalk.blue.bold('here we go for the next round!'));
             startRound();
         } else {
-            console.log('Thanks for playing!');
+            console.log(chalk.cyan.italic('I see how it is....'));
             process.exit();
         }
     })
-}
+};
+
+//========================================================================================================================
+// START A ROUND
+//========================================================================================================================
+startRound();

@@ -1,5 +1,10 @@
-var Letter = require("./Letter");
+//========================================================================================================================
+// WORD CONSTRUCTOR
+//========================================================================================================================
 
+var Letter = require("./Letter");
+var colors = require('colors/safe');
+var chalk = require('chalk');
 
 var Word = function(word){
     this.lettersArr = word.split('');
@@ -25,6 +30,7 @@ var Word = function(word){
         }
         var wordStr = tempArr.join('');
         //Display gameboard
+        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
         console.log(wordStr);
     }
 
@@ -36,18 +42,27 @@ var Word = function(word){
         if(letters.test(guess)){
             //checks if user guess is in word
             var correctGuess = false;
-            // for(var i = 0; i < this.wordArr.length; i++){
-            //     this.wordArr[i].checkGuess(guess);
-            // }
+            var repeat = false;
 
             for(var i = 0; i < this.wordArr.length; i++){
-                if(this.wordArr[i].checkGuess(guess)){
+                var check = this.wordArr[i].checkGuess(guess);
+                if(check === 'repeat'){
+                    repeat = true;
+                }
+                else if(check){
                     correctGuess = true;
                 }
             }
-            if(!correctGuess){
+            // removes a guess if incorrect
+            if (correctGuess){
+                console.log(chalk.green('CORRECT!'));
+            }
+            else if(repeat){
+                console.log('You already guessed the letter ' + this.character + '!!');
+            } else {
                 this.guessesRemaining--;
-                console.log('Reamining Guesses: ' + this.guessesRemaining);
+                console.log(chalk.red(guess.toUpperCase() + ' is INCORRECT!'));
+                console.log(chalk.bold.underline('Reamining Guesses: ' + this.guessesRemaining));
             }
 
             this.displayWordStr();
@@ -55,12 +70,6 @@ var Word = function(word){
         } else {
             console.log('PLEASE INPUT A LETTER ONLY!');
         }
-
-
-        // for(var i = 0; i < this.wordArr.length; i++){
-        //     this.wordArr[i].checkGuess(guess);
-        // }
-        // this.displayWordStr();
     }
 
     this.checkFinishedWord = function(){

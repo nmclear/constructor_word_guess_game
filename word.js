@@ -3,7 +3,6 @@
 //========================================================================================================================
 
 var Letter = require("./Letter");
-var colors = require('colors/safe');
 var chalk = require('chalk');
 
 var Word = function(word){
@@ -30,7 +29,7 @@ var Word = function(word){
         }
         var wordStr = tempArr.join('');
         //Display gameboard
-        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~');
+        console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \n');
         console.log(wordStr);
     }
 
@@ -48,25 +47,21 @@ var Word = function(word){
                 var check = this.wordArr[i].checkGuess(guess);
                 if(check === 'repeat'){
                     repeat = true;
-                }
-                else if(check){
+                } else if(check){
                     correctGuess = true;
                 }
             }
             // removes a guess if incorrect
             if (correctGuess){
                 console.log(chalk.green('CORRECT!'));
-            }
-            else if(repeat){
-                console.log('You already guessed the letter ' + this.character + '!!');
+            } else if(repeat){
+                console.log('You already guessed the letter ' + guess.toUpperCase() + '!!');
             } else {
                 this.guessesRemaining--;
                 console.log(chalk.red(guess.toUpperCase() + ' is INCORRECT!'));
                 console.log(chalk.bold.underline('Reamining Guesses: ' + this.guessesRemaining));
             }
-
             this.displayWordStr();
-
         } else {
             console.log('PLEASE INPUT A LETTER ONLY!');
         }

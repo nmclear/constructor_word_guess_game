@@ -5,8 +5,6 @@
 var Letter = require("./Letter");
 var Word = require("./Word");
 var inquirer = require('inquirer');
-// var prompt = require('prompt');
-var colors = require('colors/safe');
 var chalk = require('chalk');
 
 //========================================================================================================================
@@ -14,14 +12,10 @@ var chalk = require('chalk');
 //========================================================================================================================
 
 var wordBank = [
-    // 'dog',
-    // 'cat',
-    // 'fish',
-    // 'ocean',
-    // 'shark',
-    // 'seaweed',
-    // 'pacific ocean',
-    'blue whale'
+    'friends','seinfeld','cheers','the big bang theory',
+    'modern family','how i met your mother','the office',
+    'arrested development','parks and recreation','community',
+    'family guy','its always sunny in philadelphia','bobs burgers'
 ];
 
 //========================================================================================================================
@@ -29,13 +23,16 @@ var wordBank = [
 //========================================================================================================================
 
 function startRound(){
+    console.log(chalk.green(
+        'Welcome!!! Enjoy the word guess game! \n Hint: all words are tv sitcom titles \n'
+    ));
     var selectWord = wordBank[Math.floor((Math.random() * wordBank.length))];
     var roundWord = new Word(selectWord);
     roundWord.setWordLetters();
-    guessAttempt(roundWord);
+    guessAttempt(roundWord, selectWord);
 };
 
-function guessAttempt(roundWord){
+function guessAttempt(roundWord, selectWord){
     if(roundWord.guessesRemaining > 0){
         inquirer.prompt([
             {
@@ -52,11 +49,12 @@ function guessAttempt(roundWord){
                 console.log('You win!');
                 playAgain();
             } else {
-                guessAttempt(roundWord);
+                guessAttempt(roundWord, selectWord);
             }
         });
     } else {
-        console.log('You lost! No guesses remaining.');
+        console.log(chalk.red('You lost! No guesses remaining.' + '\n' +
+        'The correct word is: ' + selectWord.toUpperCase()));
         playAgain();
     }
 };
@@ -83,4 +81,5 @@ function playAgain(){
 //========================================================================================================================
 // START A ROUND
 //========================================================================================================================
+
 startRound();

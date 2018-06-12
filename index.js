@@ -11,7 +11,6 @@ var wordBank = [
     'shark'
 ];
 
-var guessRemaining = 10;
 
 startRound();
 
@@ -26,8 +25,7 @@ function startRound(){
 
 
 function guessAttempt(roundWord){
-    if(guessRemaining > 0){
-        console.log(guessRemaining + ' guesses remaining..');
+    if(roundWord.guessesRemaining > 0){
         inquirer.prompt([
             {
                 type: 'input',
@@ -36,22 +34,33 @@ function guessAttempt(roundWord){
             }
         ]).then(function(response){
             var userLetter = response.letter;
-            var letters = /^[A-Za-z]+$/;
-
-            if(letters.test(userLetter)){
-                console.log(roundWord);
-                roundWord.checkWord(userLetter);
-    
-                if(roundWord.checkFinishedWord()){
-                    console.log('You win!');
-                    playAgain();
-                } else {
-                    guessAttempt(roundWord);
-                }
+            //Check if userLetter is in the roundWord.
+            roundWord.checkWord(userLetter);
+            //Check to see if user guessed all characters.
+            if(roundWord.checkFinishedWord()){
+                console.log('You win!');
+                playAgain();
             } else {
-                console.log('PLEASE INPUT A LETTER ONLY!');
                 guessAttempt(roundWord);
             }
+            // guessAtempt(roundWord);
+
+
+            // // Check if input is a letter.
+            // if(letters.test(userLetter)){
+            //     console.log(roundWord);
+            //     roundWord.checkWord(userLetter);
+            //     //Check to see if user guessed all characters.
+            //     if(roundWord.checkFinishedWord()){
+            //         console.log('You win!');
+            //         playAgain();
+            //     } else {
+            //         guessAttempt(roundWord);
+            //     }
+            // } else {
+            //     console.log('PLEASE INPUT A LETTER ONLY!');
+            //     guessAttempt(roundWord);
+            // }
         });
     } else {
         console.log('You lost! No guesses remaining.');

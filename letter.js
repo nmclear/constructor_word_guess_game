@@ -1,7 +1,7 @@
 
 //Constructor function for creating letter objects
 var Letter = function(character){
-    this.character = character;
+    this.character = character.toUpperCase();
     this.guessed = false;
     //if guessed, display character, else display placeholder.
     this.guess = function(){
@@ -13,8 +13,13 @@ var Letter = function(character){
     }
     //Checks if user guess is true.
     this.checkGuess = function(userGuess){
-        if(userGuess === this.character){
-            this.guessed = true;
+    
+        if(userGuess.toUpperCase() === this.character){
+            if(this.guessed === true){
+                console.log('You already guessed the letter ' + this.character + '!!');
+            } else {
+                this.guessed = true;
+            }
         }
         this.guess();
     }

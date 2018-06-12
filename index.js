@@ -11,6 +11,7 @@ var wordBank = [
     'shark'
 ];
 
+var guessRemaining = 10;
 
 startRound();
 
@@ -19,34 +20,44 @@ function startRound(){
     console.log('selectWord: ' + selectWord);
     var roundWord = new Word(selectWord);
     roundWord.setWordLetters();
-    guessAtempt(roundWord);
+    guessAttempt(roundWord);
 }
 
 
 
-function guessAtempt(roundWord){
-    inquirer.prompt([
-        {
-            type: 'input',
-            name: 'letter',
-            message: 'Guess a letter.'
-        }
-    ]).then(function(response){
-        var userLetter = response.letter;
-        console.log(roundWord);
-        roundWord.checkWord(userLetter);
+function guessAttempt(roundWord){
+    if(guessRemaining > 0){
+        console.log(guessRemaining + ' guesses remaining..');
+        inquirer.prompt([
+            {
+                type: 'input',
+                name: 'letter',
+                message: 'Guess a letter.'
+            }
+        ]).then(function(response){
+            var userLetter = response.letter;
+            var letters = /^[A-Za-z]+$/;
 
-        if(roundWord.checkFinishedWord()){
-            console.log('You win!');
-            playAgain();
-        } else {
-            guessAtempt(roundWord);
-        }
-    });
+            if(letters.test(userLetter)){
+                console.log(roundWord);
+                roundWord.checkWord(userLetter);
+    
+                if(roundWord.checkFinishedWord()){
+                    console.log('You win!');
+                    playAgain();
+                } else {
+                    guessAttempt(roundWord);
+                }
+            } else {
+                console.log('PLEASE INPUT A LETTER ONLY!');
+                guessAttempt(roundWord);
+            }
+        });
+    } else {
+        console.log('You lost! No guesses remaining.');
+        playAgain();
+    }
 }
-
-
-
 
 function playAgain(){
     inquirer.prompt([

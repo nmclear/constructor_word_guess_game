@@ -8,7 +8,10 @@ var wordBank = [
     'cat',
     'fish',
     'ocean',
-    'shark'
+    'shark',
+    'seaweed',
+    'pacific ocean',
+    'blue whale'
 ];
 
 

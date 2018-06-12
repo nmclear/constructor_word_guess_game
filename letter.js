@@ -5,7 +5,10 @@ var Letter = function(character){
     this.guessed = false;
     //if guessed, display character, else display placeholder.
     this.guess = function(){
-        if(this.guessed){
+        if(this.character === ' '){
+            return '   ';
+        }
+        else if(this.guessed){
             return this.character;
         } else {
             return '_ ';

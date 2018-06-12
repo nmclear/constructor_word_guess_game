@@ -39,7 +39,6 @@ var Word = function(word){
             // for(var i = 0; i < this.wordArr.length; i++){
             //     this.wordArr[i].checkGuess(guess);
             // }
-  
 
             for(var i = 0; i < this.wordArr.length; i++){
                 if(this.wordArr[i].checkGuess(guess)){
@@ -52,10 +51,7 @@ var Word = function(word){
             }
 
             this.displayWordStr();
-            // if(!return){
-            //     this.guessesRemaining--;
-            //     console.log(this.guessesRemaining + '... you know this guess');
-            // }
+
         } else {
             console.log('PLEASE INPUT A LETTER ONLY!');
         }

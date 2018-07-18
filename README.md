@@ -1,4 +1,7 @@
 # TV Sitcoms Command Line Word Guess Game
+
+<p>Example Video: https://drive.google.com/file/d/19uaIHhz5Ux7bEciBiMU08rndIj4K9FsQ/view?usp=sharing</p>
+
 <p>Test your sitcom knowledge with this command line word guess game. A TV sitcom title will be selected at random. You have 10 guesses to figure out the word or you lose.</p>
 
 ### Clone the Repository
